@@ -12,6 +12,7 @@ namespace WebApplication___Week_5.ViewModels
             set { _Id = value; }
         }
 
+
         [Required]
         [Display(Name = "Role Name")]
         public string RoleName { get; set; }

@@ -29,6 +29,7 @@ namespace WebApplication___Week_5.Data
         }
         public DbSet<MyRegisteredUser> MyRegisteredUsers { get; set; }
         public DbSet<WebApplication___Week_5.ViewModels.RoleVM> RoleVM { get; set; } = default!;
+        public DbSet<WebApplication___Week_5.ViewModels.UserVM> UserVM { get; set; } = default!;
     }
 
 }
