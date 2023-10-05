@@ -5,7 +5,7 @@ using WebApplication___Week_5.Data;
 
 namespace WebApplication___Week_5.Pages
 {
-    [Authorize]
+    [Authorize(Roles = "Admin,Manager")]
     public class SecureAreaModel : PageModel
     {
         // Declare class level db context variable.
