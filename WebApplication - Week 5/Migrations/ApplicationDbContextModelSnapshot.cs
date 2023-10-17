@@ -231,6 +231,118 @@ namespace WebApplication___Week_5.Migrations
                     b.ToTable("MyRegisteredUsers");
                 });
 
+            modelBuilder.Entity("WebApplication___Week_5.Data.Order", b =>
+                {
+                    b.Property<int>("ProductID")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("OrderID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("Discounted")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("ProductID", "OrderID");
+
+                    b.ToTable("Orders");
+
+                    b.HasData(
+                        new
+                        {
+                            ProductID = 1,
+                            OrderID = 1000,
+                            Discounted = false,
+                            Quantity = 10
+                        },
+                        new
+                        {
+                            ProductID = 2,
+                            OrderID = 1001,
+                            Discounted = true,
+                            Quantity = 23
+                        });
+                });
+
+            modelBuilder.Entity("WebApplication___Week_5.Data.Product", b =>
+                {
+                    b.Property<int>("ProductID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ProductName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("ProductID");
+
+                    b.ToTable("Products");
+
+                    b.HasData(
+                        new
+                        {
+                            ProductID = 1,
+                            Price = 23.48m,
+                            ProductName = "Oranges"
+                        },
+                        new
+                        {
+                            ProductID = 2,
+                            Price = 38.45m,
+                            ProductName = "Apples"
+                        },
+                        new
+                        {
+                            ProductID = 3,
+                            Price = 38.45m,
+                            ProductName = "Gary's Peaches"
+                        });
+                });
+
+            modelBuilder.Entity("WebApplication___Week_5.ViewModels.RoleVM", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("RoleName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("RoleVM");
+                });
+
+            modelBuilder.Entity("WebApplication___Week_5.ViewModels.UserRoleVM", b =>
+                {
+                    b.Property<string>("Email")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Role")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Email");
+
+                    b.ToTable("UserRoleVM");
+                });
+
+            modelBuilder.Entity("WebApplication___Week_5.ViewModels.UserVM", b =>
+                {
+                    b.Property<string>("Email")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Email");
+
+                    b.ToTable("UserVM");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -280,6 +392,22 @@ namespace WebApplication___Week_5.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("WebApplication___Week_5.Data.Order", b =>
+                {
+                    b.HasOne("WebApplication___Week_5.Data.Product", "Product")
+                        .WithMany("Orders")
+                        .HasForeignKey("ProductID")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("WebApplication___Week_5.Data.Product", b =>
+                {
+                    b.Navigation("Orders");
                 });
 #pragma warning restore 612, 618
         }
