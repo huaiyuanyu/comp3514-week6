@@ -60,7 +60,7 @@
                     Edit
                 </a> |
                     <a href="./ProductOrder/Details?OrderID=@Html.Raw(item.OrderID)&ProductID=@Html.Raw(item.ProductID)">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.ProductOrderID">Delete</a>
+                    <a href="./ProductOrder/Delete?OrderID=@Html.Raw(item.OrderID)&ProductID=@Html.Raw(item.ProductID)">Delete</a>
             </td>
         </tr>
 }

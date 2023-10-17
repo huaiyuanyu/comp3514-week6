@@ -35,6 +35,21 @@ namespace WebApplication___Week_5.Repositories
             }
         }
 
+        public async Task<bool> Delete(ProductOrderVM model)
+        {
+            Order order = await _context.Orders.Where(po => po.OrderID == model.OrderID
+                        && po.ProductID == model.ProductID).FirstOrDefaultAsync();
+
+
+            if (order != null)
+            {
+                _context.Orders.Remove(order);
+                await _context.SaveChangesAsync();
+                return true;
+            } else { return false; }
+            
+        }
+
         public async Task<IList<ProductOrderVM>> All()
         {
             var query = from p in _context.Products
@@ -85,6 +100,7 @@ namespace WebApplication___Week_5.Repositories
             var productOrder = await query.FirstOrDefaultAsync().ConfigureAwait(true);
             return productOrder;
         }
+
     }
 
 }
