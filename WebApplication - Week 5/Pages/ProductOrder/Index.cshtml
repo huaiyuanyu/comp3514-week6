@@ -6,63 +6,77 @@
 }
 
 <h1>Index</h1>
+<h4>ProductOrderVM</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-<p>
-    <a asp-page="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.ProductOrderVM[0].ProductID)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ProductOrderVM[0].Price)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ProductOrderVM[0].ProductName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ProductOrderVM[0].OrderID)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ProductOrderVM[0].Discounted)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ProductOrderVM[0].Quantity)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model.ProductOrderVM) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProductID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProductName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.OrderID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Discounted)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Quantity)
-            </td>
-            <td>
-                <a href="./ProductOrder/Edit?OrderID=@Html.Raw(item.OrderID)&ProductID=@Html.Raw(item.ProductID)">
-                    Edit
-                </a> |
-                    <a href="./ProductOrder/Details?OrderID=@Html.Raw(item.OrderID)&ProductID=@Html.Raw(item.ProductID)">Details</a> |
-                    <a href="./ProductOrder/Delete?OrderID=@Html.Raw(item.OrderID)&ProductID=@Html.Raw(item.ProductID)">Delete</a>
-            </td>
-        </tr>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.productMfgVMs[0].ProductName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.productMfgVMs[0].Price)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.productMfgVMs[0].Quantity)
+                        </th>
+
+                        <th>
+                            @Html.DisplayNameFor(model => model.productMfgVMs[0].Discounted)
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        var counter = 0;
+                    }
+                    @foreach (var item in Model.productMfgVMs)
+                    {
+                        <tr>
+                            <td>
+                                <input type="hidden" name="productMfgVMs[@Html.Raw(counter)].OrderID" asp-for="@item.OrderID" />
+                                <label asp-for="@item.ProductName" class="control-label"></label>
+                                <input asp-for="@item.ProductName" name="productMfgVMs[@Html.Raw(counter)].ProductName" class="form-control" />
+                                <span asp-validation-for="@item.ProductName" class="text-danger"></span>
+                            </td>
+                            <td>
+                                <label asp-for="@item.Price" class="control-label"></label>
+                                <input asp-for="@item.Price" name="productMfgVMs[@Html.Raw(counter)].Price" class="form-control" />
+                                <span asp-validation-for="@item.Price" class="text-danger"></span>
+                            </td>
+                            <td>
+                                <label asp-for="@item.Quantity" class="control-label"></label>
+                                <input asp-for="@item.Quantity" name="productMfgVMs[@Html.Raw(counter)].Quantity" class="form-control" />
+                                <span asp-validation-for="@item.Quantity" class="text-danger"></span>
+                            </td>
+                            <td>
+                                <div class="form-group form-check">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input" name="productMfgVMs[@Html.Raw(counter)].Discounted" asp-for="@item.Discounted" />
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                        {
+                            counter++;
+                        }
+                    }
+                </tbody>
+            </table>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
-    </tbody>
-</table>

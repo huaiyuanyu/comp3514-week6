@@ -23,15 +23,26 @@ namespace WebApplication___Week_5.Pages.ProductOrder
             _productOrderVMRepo = new ProductOrderVMRepo(context);
         }
 
-        public IList<ProductOrderVM> ProductOrderVM { get; set; } = default!;
+        [BindProperty]
+        public List<ProductOrderVM> productMfgVMs { get; set; } = default!;
 
-        public async Task OnGetAsync()
+        public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (_context.ProductOrderVM != null)
+            IList<ProductOrderVM> productmfgvm = await _productOrderVMRepo.All();
+            if (productmfgvm == null)
             {
-                ProductOrderVM = await _productOrderVMRepo.All();
+                return NotFound();
             }
+            productMfgVMs = productmfgvm.ToList(); // converting 
+            return Page();
+        }
+
+        public IActionResult OnPostAsync()
+        {
+            var x = productMfgVMs; // This is the data
+            return RedirectToPage("./Index");
         }
     }
+
 
 }

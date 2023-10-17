@@ -66,7 +66,7 @@ namespace WebApplication___Week_5.Pages.ProductOrder
                 throw;
             }
 
-            return RedirectToPage("./ProductOrder");
+            return RedirectToPage("./Index");
         }
 
         private bool ProductOrderVMExists(int id)
