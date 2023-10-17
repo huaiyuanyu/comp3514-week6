@@ -124,6 +124,8 @@ namespace WebApplication___Week_5.Data
                 });
         }
 
+        public DbSet<WebApplication___Week_5.ViewModels.ProductOrderVM> ProductOrderVM { get; set; } = default!;
+
 
 
 
