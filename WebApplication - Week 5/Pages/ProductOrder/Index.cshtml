@@ -56,8 +56,10 @@
                 @Html.DisplayFor(modelItem => item.Quantity)
             </td>
             <td>
-                <a asp-page="./Edit" asp-route-id="@item.ProductOrderID">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.ProductOrderID">Details</a> |
+                <a href="./ProductOrder/Edit?OrderID=@Html.Raw(item.OrderID)&ProductID=@Html.Raw(item.ProductID)">
+                    Edit
+                </a> |
+                    <a href="./ProductOrder/Details?OrderID=@Html.Raw(item.OrderID)&ProductID=@Html.Raw(item.ProductID)">Details</a> |
                 <a asp-page="./Delete" asp-route-id="@item.ProductOrderID">Delete</a>
             </td>
         </tr>

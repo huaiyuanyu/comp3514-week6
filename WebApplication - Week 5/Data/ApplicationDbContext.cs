@@ -24,8 +24,9 @@ namespace WebApplication___Week_5.Data
 
     public class Order
     {
-        [Display(Name = "Order ID")]
+        [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Display(Name = "Order ID")]
         public int OrderID { get; set; }
 
         [Display(Name = "Product ID")]
